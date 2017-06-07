@@ -181,7 +181,7 @@ export default class App extends Component {
           }
         </div>
         <a 
-          href="http://gojutin.github.com" 
+          href="https://github.com/gojutin/react-animations-demo" 
           rel="noopener noreferrer" 
           target="_blank">
           <i className={`fa fa-github fa-2x ${css(styles.github)}`} />
