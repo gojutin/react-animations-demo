@@ -5,46 +5,63 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#00C851",
     width: 100 + "%",
-    minHeight: 40 + "vh",
+    height: 250 + "px",
+    minHeight: 34 + "%",
     position: "fixed",
-    background: "black",
+    background: "#2E2E2E",
     zIndex: 9999,
+  },
+  optionsBox: {
+    position: "relative",
+    top: 250 + "px",
+    textAlign: "center",
+    padding: "15px 5%"
   },
   title: {
     margin: 5,
     padding: 0,
   },
   child: {
-    fontSize: 8 + "em",
-    paddingTop: 45 + "px", 
+    fontSize: 7 + "em",
+    paddingTop: .5 + "em", 
   },
   text: {
     fontSize: 4 + "em",
     paddingTop: 45 + "px", 
   },
-  optionsBox: {
-    position: "relative",
-    top: 40 + "vh",
-    textAlign: "center",
-    padding: "15px 5%"
+  github: {
+    position: "fixed",
+    top: 15,
+    right: 15,
+    color: "#bdbdbd",
+    zIndex: 10000
   },
-  label: {
-    padding: 10 + "px",
-    marginTop: 15 + "px",
-  },
-  mergeToggle: {
-    textDecoration: "underline",
+  animationButton: {
+    height: 28 + "px",
+    padding: "5px 5px 0px 5px",
+    margin:"2px 2px",
+    borderRadius: 5 + "px",
+    width: 90 + "%",
+    border: "1px solid #4B515D",
+    outline: "none",
     cursor: "pointer",
-    width: 150 + "px",
-    margin: "0 auto",
-    padding: 0,
-    marginBottom: 10 + "px",
-    color: "#3E4551",
+    overflow: "auto",
+    display: "inline-block",
+    ':hover': {
+      background: "#eeeeee",
+    }
+  },
+  animationButtonMerge: {
+    border: "1px solid #4B515D",
+    // ':hover': {
+    //   background: "lightgray",
+    // }
   },
   mergeButton: {
-    width: "auto",
-    height: 37 + "px",
-    margin: 9 + "px",
+    maxWidth: 90 + "%",
+    overflow: "scroll",
+    height: 40 + "px",
+    marginTop: 40 + "px",
     border: "1px solid #4B515D",
     borderRadius: 5 + "px",
     background: "none",
@@ -53,51 +70,6 @@ const styles = StyleSheet.create({
     fontSize: 1.0 + "em",
     color: "#00C851",
   },
-  mergeText: {
-    padding: 4 + "px", 
-    margin: 0,  
-    color: "#3E4551"
-  },
-  check: {
-    color: "#00C851",
-    marginLeft: 8 + "px",
-  },
-  select: {
-    display: "inline-block",
-    fontSize: 1.5 + "em",
-    outline: "none",
-    width: 98 + "%",
-    margin: 0,
-    lineHeight: 1.5 + "em",
-  },
-  github: {
-    position: "fixed",
-    top: 10,
-    right: 10,
-    color: "#4B515D",
-    zIndex: 10000
-  },
-  animationButton: {
-    height: 25 + "px",
-    paddingTop: 4 + "px",
-    margin:"2px 5px",
-    borderRadius: 5 + "px",
-    width: 200 + "px",
-    border: "1px solid lightgray",
-    outline: "none",
-    cursor: "pointer",
-    overflow: "auto",
-    display: "inline-block",
-    ':hover': {
-      background: "lightgray",
-    }
-  },
-  animationButtonMerge: {
-    border: "1px solid #4B515D",
-    ':hover': {
-      background: "lightgray",
-    }
-  },
   animationButtonSelected: {
     background: "#00C851",
     color: "white",
@@ -105,12 +77,17 @@ const styles = StyleSheet.create({
       background: "#00C851",
     }
   },
-  filler: {
-    height: 53 + "px",
+  newAnimation: {
+    color: "#0277bd",
   },
-  icons: {
-    padding: 5 + "px",
-  }
+  mergeToggle: {
+    cursor: "pointer",
+    width: 150 + "px",
+    margin: "0 auto",
+    padding: 10 + "px",
+    marginBottom: 10 + "px",
+    color: "#3E4551",
+  },
 });
 
 export default styles;
