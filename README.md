@@ -1,13 +1,14 @@
-#react-animations demo
+# react-animations demo
 
-###An interactive app showcasing the wonderful animations provided by our friends at [Formidable Labs](https://formidable.com/). 
+### An interactive app showcasing the wonderful animations provided by our friends at [Formidable Labs](https://formidable.com/). 
 
-###[Check it out here](react-animations.surge.sh)
+### [Check out the interactive demo here](react-animations.surge.sh)
 
 This project is a single-page application that was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Main libraries used in this project:
 
+Library | Description
 ------------ | -------------
 [React](https://facebook.github.io/react/) | A JavaScript library for building user interfaces
 
@@ -15,7 +16,7 @@ Main libraries used in this project:
 
 [Aphrodite (styling)](https://github.com/Khan/aphrodite) | It's inline styles, but they work!
 
-##How to run the app locally
+## How to run the app locally
 
 In your terminal:
 
