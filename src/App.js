@@ -2,34 +2,37 @@ import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import * as react_animations from 'react-animations';
 import styles from './appStyles';
-import ScrollToTop from 'react-scroll-up';
 
 // components
+import GitHub from './components/GitHub';
 import AnimationFrame from './components/AnimationFrame';
 import Options from './components/Options';
-import Merge from './components/Merge';
+import MergeOptions from './components/MergeOptions';
 import AnimationButtons from './components/AnimationButtons';
+import ScrollUp from './components/ScrollUp';
 
 export default class App extends Component {
 
   state = {
-    animationsObject: {},
-    originalAnimations: {},
-    currentAnimation: "",
-    mergedAnimations: [],
+    animations : {
+      animationsObject: {},
+      originalAnimations: {},
+      currentAnimation: "",
+      mergedAnimations: [],
+      newAnimation: "",
+      duration: '1',
+    },
     inputValue: "",
     showMergeOptions: false,
     showOptions: false,
-    duration: '1',
-    newAnimation: "",
     icon: "fa-child",
   }
 
   componentWillMount() {
-    this.resetAnimations();
+    this.fetchAnimations();
   }
 
-  resetAnimations = () => {
+  fetchAnimations = () => {
     let animationsObject = {};
     Object.keys(react_animations).forEach(key => {
       if (key !== "merge") {
@@ -40,23 +43,29 @@ export default class App extends Component {
         }
       }
     })
-    this.setState({
+    this.updateAnimations({
       animationsObject,
       originalAnimations: animationsObject,
     })
   }
 
+  updateAnimations = (animationObject, cb) => {
+    this.setState({
+      animations: Object.assign({}, this.state.animations, animationObject)
+    }, () => { if (cb) cb();})
+  }
+
 
   handleAnimation = animation => {
-    this.setState(prevState => ({
+    this.updateAnimations({
         currentAnimation: "",
-    }), () => {
+    }, () => {
       if (this.state.showMergeOptions) {
-        this.setState({
-          currentAnimation: this.state.newAnimation,
+        this.updateAnimations({
+          currentAnimation: this.state.animations.newAnimation,
         })
       } else {
-        this.setState({
+        this.updateAnimations({
           currentAnimation: animation,
         })
       }
@@ -66,9 +75,11 @@ export default class App extends Component {
   toggleMergeOptions = () => {
     this.setState(prevState => ({
       showMergeOptions: !prevState.showMergeOptions,
+    }));
+    this.updateAnimations({
       currentAnimation: "",
       mergedAnimations: [],
-    }));
+    })
   }
 
   toggleShowOptions = () => {
@@ -78,53 +89,54 @@ export default class App extends Component {
   }
 
   handleMerge = (name, animation) => {
-    const { mergedAnimations } = this.state;
+    const { mergedAnimations } = this.state.animations;
     let mergeSlice = mergedAnimations.slice();
-    const exists = mergedAnimations.findIndex(animation => animation.name === name);
+    const exists = mergedAnimations.findIndex(animation => 
+      animation.name === name
+    );
 
-    if (exists !== -1) {
+    if (exists < 0) {
       mergeSlice.splice(exists,1);
     } else {
-      if (mergedAnimations.length === 2) {
-        return;
-      }
+      if (mergedAnimations.length === 2) return false;
       mergeSlice.push(animation);
     }
-    this.setState({
+    this.updateAnimations({
       mergedAnimations: mergeSlice,
     }, () => {
       if (mergeSlice.length === 2) {
-        const newAnimationName= this.state.mergedAnimations[0]["name"] + this.state.mergedAnimations[1]["name"];
+        const { mergedAnimations, animationsObject, duration } = this.state.animations;
+        const newAnimationName= mergedAnimations[0]["name"] 
+          + mergedAnimations[1]["name"];
 
         // this is where the merge happens
         const mergedAnim = react_animations.merge(
-          this.state.mergedAnimations[0]["animationName"],
-          this.state.mergedAnimations[1]["animationName"],
+          mergedAnimations[0]["animationName"],
+          mergedAnimations[1]["animationName"],
         )
         const newAnimationsObject = Object.assign(
           {}, 
-          this.state.animationsObject, 
+          animationsObject, 
           {[newAnimationName] : {
               animationName: mergedAnim,
-              animationDuration: this.state.duration + 's',
+              animationDuration: duration + 's',
               name: newAnimationName,
             }
           }
         );
-        this.setState({  
+        this.updateAnimations({  
           newAnimation: newAnimationName,     
           animationsObject: newAnimationsObject,
-        })
-        this.handleAnimation();
+        }, () => this.handleAnimation())
       }
     })
   }
 
   handleInput = (e) => {
     this.setState({
-      currentAnimation: "",
       inputValue: e.target.value,
     })
+    this.updateAnimations({currentAnimation: ""})
   }
 
   handleIcon = (icon) => {
@@ -143,7 +155,7 @@ export default class App extends Component {
       console.log(prop)
       newSlice[prop].animationDuration = e.target.value + "s";
     }
-    this.setState({
+    this.updateAnimations({
       currentAnimation: "",
       animationsObject: newSlice,
       duration: e.target.value,
@@ -151,30 +163,23 @@ export default class App extends Component {
   }
   
   render() {
-    const { animationsObject, inputValue, currentAnimation, showOptions, showMergeOptions, duration, mergedAnimations, newAnimation, icon, originalAnimations } = this.state;
+    const { animations, inputValue, showOptions, showMergeOptions, icon } = this.state;
 
-    const stylesheet = StyleSheet.create(animationsObject);
+    const stylesheet = StyleSheet.create(animations.animationsObject);
 
      return (
       <div>
 
+        <GitHub className={css(styles.github)} />
+
         <AnimationFrame 
-          currentAnimation={currentAnimation}
+          animations={animations}
           inputValue={inputValue}
           showMergeOptions={showMergeOptions}
-          mergedAnimations={mergedAnimations}
           handleAnimation={this.handleAnimation} 
-          newAnimation={newAnimation}
           stylesheet={stylesheet}
           icon={icon}
         />
-
-        <a 
-          href="https://github.com/gojutin/react-animations-demo" 
-          rel="noopener noreferrer" 
-          target="_blank">
-          <i className={`fa fa-github fa-2x ${css(styles.github)}`} />
-        </a>
 
         <div className={css(styles.optionsBox)}>
           <i 
@@ -186,45 +191,26 @@ export default class App extends Component {
             showOptions={showOptions} 
             inputValue={inputValue}
             handleInput={this.handleInput}
-            duration={duration}
+            duration={animations.duration}
             handleDuration={this.handleDuration}
             handleIcon={this.handleIcon }
             icon={icon}
           />
-          <h4 className={css(styles.mergeToggle)} onClick={this.toggleMergeOptions}>
-              {showMergeOptions ? "close merge options" : "open merge options"}
-            <i 
-              style={{paddingLeft: 5 + "px"}}
-              className={`
-                fa
-                ${showMergeOptions ? "fa-caret-up" : "fa-caret-down"}
-              `}
-            />
-          </h4>
 
-          <Merge showMergeOptions={showMergeOptions} />
+          <MergeOptions 
+            showMergeOptions={showMergeOptions}
+            toggleMergeOptions={this.toggleMergeOptions}
+            className={css(styles.mergeToggle)}
+          />
 
           <AnimationButtons
-            animationsObject={animationsObject}
-            mergedAnimations={mergedAnimations}
-            originalAnimations={originalAnimations}
+            animations={animations}
             showMergeOptions={showMergeOptions}
             handleMerge={this.handleMerge} 
             handleAnimation={this.handleAnimation}
           />
 
-            <ScrollToTop 
-              showUnder={300} 
-              style={{
-                position: "fixed", 
-                bottom: 0, 
-                right: 45 + "%", 
-                left: 45 + "%"
-              }}
-            >
-              <i className={`fa fa-arrow-circle-up ${css(styles.scrollUpIcon)}`} />
-            </ScrollToTop>
-
+          <ScrollUp className={css(styles.scrollUpIcon)} />
         </div>
       </div>
     );

@@ -31,31 +31,39 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({currentAnimation, inputValue, showMergeOptions, mergedAnimations, handleAnimation, newAnimation, stylesheet, icon}) => 
-  <div className={css(styles.animationFrame)}>
-    { inputValue 
-      ? <h1 className={`
-          ${css(styles.text)}
-          ${css(stylesheet[currentAnimation])}
-        `}>
-          {inputValue}
-        </h1>
-      : <i className={` 
-            fa
-            ${icon}
-            ${css(styles.child)}
-            ${css(stylesheet[currentAnimation])}
-          `}
-        />   
-    }
-    { showMergeOptions && 
-      <div className={css(styles.playButton)} style={{display: mergedAnimations.length === 2 ? "block" : "none" }} >
-          <i 
-            className={`fa fa-repeat fa-2x `}
-            onClick={handleAnimation} 
-          />
-          <div>{newAnimation}</div>
-      </div>
-    }
+export default ({animations, inputValue, showMergeOptions, handleAnimation, stylesheet, icon}) => {
 
-  </div>
+  const { currentAnimation, mergedAnimations, newAnimation, } = animations;
+
+  return (
+    <div className={css(styles.animationFrame)}>
+      { inputValue 
+        ? <h1 className={`
+            ${css(styles.text)}
+            ${css(stylesheet[currentAnimation])}
+          `}>
+            {inputValue}
+          </h1>
+        : <i className={` 
+              fa
+              ${icon}
+              ${css(styles.child)}
+              ${css(stylesheet[currentAnimation])}
+            `}
+          />   
+      }
+      { showMergeOptions && 
+        <div className={css(styles.playButton)} style={{display: mergedAnimations.length === 2 ? "block" : "none" }} >
+            <i 
+              className={`fa fa-repeat fa-2x `}
+              onClick={handleAnimation} 
+            />
+            <div>{newAnimation}</div>
+        </div>
+      }
+
+    </div>
+  );
+}
+
+  
