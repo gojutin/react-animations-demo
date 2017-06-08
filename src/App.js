@@ -152,7 +152,7 @@ export default class App extends Component {
     if (e.target.value < 0 || e.target.value > 25) {
       return false;
     } 
-    const newSlice = Object.assign({}, this.state.animationsObject);
+    const newSlice = Object.assign({}, this.state.animations.animationsObject);
     for (let prop in newSlice) {
       console.log(prop)
       newSlice[prop].animationDuration = e.target.value + "s";
