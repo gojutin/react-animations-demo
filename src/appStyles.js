@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
   optionsBox: {
     position: "relative",
-    top: 250 + "px",
+    top: 260 + "px",
     textAlign: "center",
     padding: "15px 5%"
   },
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   animationButton: {
     height: 28 + "px",
-    padding: "5px 5px 0px 5px",
+    padding: "7px 5px 0px 5px",
     margin:"2px 2px",
     borderRadius: 5 + "px",
     width: 90 + "%",
