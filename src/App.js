@@ -95,10 +95,10 @@ export default class App extends Component {
       animation.name === name
     );
 
-    if (exists < 0) {
+    if (exists > 0) {
       mergeSlice.splice(exists,1);
     } else {
-      if (mergedAnimations.length === 2) return false;
+      if (mergedAnimations.length === 2) {return};
       mergeSlice.push(animation);
     }
     this.updateAnimations({
