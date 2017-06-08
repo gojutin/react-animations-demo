@@ -24,7 +24,7 @@ export default ({showOptions, inputValue, handleInput, duration, handleDuration,
   <Collapse isOpened={showOptions}>
     <div className="columns">
       <div className="column is-10">
-        <label>Type anything you want</label>
+        <label>Type something</label>
         <Input
           type="text"
           inputValue={inputValue}

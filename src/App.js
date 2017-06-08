@@ -60,15 +60,17 @@ export default class App extends Component {
     this.updateAnimations({
         currentAnimation: "",
     }, () => {
-      if (this.state.showMergeOptions) {
-        this.updateAnimations({
-          currentAnimation: this.state.animations.newAnimation,
-        })
-      } else {
-        this.updateAnimations({
-          currentAnimation: animation,
-        })
-      }
+      setTimeout(() => {
+        if (this.state.showMergeOptions) {
+          this.updateAnimations({
+            currentAnimation: this.state.animations.newAnimation,
+          })
+        } else {
+          this.updateAnimations({
+            currentAnimation: animation,
+          })
+        }
+      },100)
     })
   }
 
@@ -95,7 +97,7 @@ export default class App extends Component {
       animation.name === name
     );
 
-    if (exists > 0) {
+    if (exists !== -1) {
       mergeSlice.splice(exists,1);
     } else {
       if (mergedAnimations.length === 2) {return};

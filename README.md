@@ -11,8 +11,8 @@ Main libraries used in this project:
 Library | Description
 ------------ | -------------
 [React](https://facebook.github.io/react/) | A JavaScript library for building user interfaces
-[react-animations (styling)](https://github.com/FormidableLabs/react-animations) | A collection of animations for inline style libraries
-[Aphrodite (styling)](https://github.com/Khan/aphrodite) | It's inline styles, but they work!
+[react-animations](https://github.com/FormidableLabs/react-animations) | A collection of animations for inline style libraries
+[Aphrodite](https://github.com/Khan/aphrodite) | It's inline styles, but they work!
 
 ## How to run the app locally
 

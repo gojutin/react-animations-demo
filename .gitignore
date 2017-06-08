@@ -16,6 +16,8 @@
 .env.test.local
 .env.production.local
 pad.txt
+README2.md
+Test.js
 
 npm-debug.log*
 yarn-debug.log*

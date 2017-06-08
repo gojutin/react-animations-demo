@@ -1,6 +1,11 @@
 import { StyleSheet } from 'aphrodite';
+import { tada } from 'react-animations';
 
 const styles = StyleSheet.create({
+  tada: {
+    animationName: tada,
+    animationDuration: '2s',
+  },
   optionsBox: {
     position: "relative",
     top: 260 + "px",
@@ -20,8 +25,7 @@ const styles = StyleSheet.create({
 
   mergeToggle: {
     cursor: "pointer",
-    padding: 5 + "px",
-    marginBottom: 5 + "px",
+    padding: 10 + "px",
     color: "#3E4551",
   },
   scrollUpIcon: {
