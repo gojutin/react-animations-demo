@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     padding: 5 + "px",
   },
   iconBox: {
-    height: 200 + "px", 
+    height: 175 + "px", 
     overflow: "auto", 
     cursor: "pointer", 
     border: "2px solid #3E4551",
@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
 
 export default ({showOptions, inputValue, handleInput, duration, handleDuration, handleIcon, icon }) =>
   <Collapse isOpened={showOptions}>
-      <div style={{width: 70 + "%", display: "inline-block", margin: 5 + "px"}}>
+    <div className="columns">
+      <div className="column is-10">
         <label>Type anything you want</label>
         <Input
           type="text"
@@ -30,7 +31,9 @@ export default ({showOptions, inputValue, handleInput, duration, handleDuration,
           onChange={handleInput}
         />
       </div>
-      <div style={{width: 15 + "%", display: "inline-block", margin: 5 + "px"}}>
+  
+ 
+      <div className="column is-2">
         <label>Duration</label>
           <Input
             type="number"
@@ -38,7 +41,7 @@ export default ({showOptions, inputValue, handleInput, duration, handleDuration,
             onChange={handleDuration}
           />  
       </div>
-    <br />
+      </div>
     <label>Choose an icon</label>
     <div className={css(styles.iconBox)}>
         { icons.map((thisIcon, i) => 
@@ -46,7 +49,7 @@ export default ({showOptions, inputValue, handleInput, duration, handleDuration,
               key={i} 
               className={`fa ${thisIcon}`} 
               onClick={() => handleIcon(thisIcon)}
-              style={{color: thisIcon === icon ? "green": "gray", margin:5 + "px"}}
+              style={{color: thisIcon === icon ? "#00C851": "#3E4551", margin:5 + "px"}}
             />
           )
 
