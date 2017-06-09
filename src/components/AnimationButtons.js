@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   animationButton: {
     backgroundColor: "#f4f4f4",
     height: 38 + "px",
-    paddingTop: 8 + "px",
+    padding: "7px 5px 0px 5px",
     margin:"2px 2px",
     borderRadius: 5 + "px",
     width: 98 + "%",

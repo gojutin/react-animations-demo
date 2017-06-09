@@ -25,7 +25,7 @@ export default class App extends Component {
     inputError: "",
     showMergeOptions: false,
     showOptions: false,
-    icon: "fa-child",
+    icon: "fa-code",
     showIcons: false,
   }
 
@@ -166,7 +166,7 @@ export default class App extends Component {
 
   handleIcon = (icon) => {
     this.setState({
-      icon: icon ? icon : "fa-child",
+      icon: icon ? icon : "fa-code",
       inputValue: "",
     })
   }
@@ -208,7 +208,7 @@ export default class App extends Component {
 
         <div className={css(styles.optionsBox)}>
           <i 
-            className="fa fa-ellipsis-h fa-2x" 
+            className="fa fa-ellipsis-h" 
             onClick={this.toggleShowOptions} 
             style={{color: showOptions ? "#00C851" : "#4B515D", marginBottom: 10 + "px"}}
           />

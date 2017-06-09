@@ -1,6 +1,6 @@
 # react-animations demo
 
-### An interactive app showcasing the wonderful animations provided by our friends at [Formidable Labs](https://formidable.com/). 
+### An interactive app showcasing the wonderful react animations provided by our friends at [Formidable Labs](https://formidable.com/). 
 
 ### [Check out the interactive demo here](react-animations-demo.surge.sh)
 
@@ -20,9 +20,9 @@ In your terminal:
 
 `cd react-animations-demo `
 
-`npm install`
+`npm install` or `yarn install`
 
-`npm start`
+`npm start` or `yarn start`
 
 Open `localhost:3000` in your browser.
 

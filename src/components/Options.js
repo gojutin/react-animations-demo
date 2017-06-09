@@ -70,7 +70,7 @@ export default ({showOptions, inputValue, inputError, handleInput, duration, han
     </Collapse>
     <Collapse isOpened={showOptions && showMergeOptions}>
       <div>
-        Please select two animations. Your custom animations will be added as a button below.
+        Please select two animations. Your custom animations will be added as a button below for the duration of the session.
       </div>
       <div>
         You can get really crazy and merge merged animations. Some combinations may not work well together. You will figure it out.

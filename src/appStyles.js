@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
   optionsBox: {
     position: "absolute",
-    top: 260 + "px",
+    top: 250 + "px",
     textAlign: "center",
     marginLeft: 10 + "px",
     marginRight: 10 + "px",
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
   mergeToggle: {
     cursor: "pointer",
-    padding: 10 + "px",
+    padding: 5 + "px",
     color: "#3E4551",
   },
   scrollUpIcon: {

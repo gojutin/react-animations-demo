@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     padding: 10 + "px",
   },
   playButton: {
-    marginTop: 25 + "px",
+    marginTop: 20 + "px",
     background: "none",
     cursor: "pointer",
     outline: "none",
@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
     fontSize: 4.5 + "em",
     paddingTop: 61 + "px", 
   },
+  a: {
+    color: "white",
+    padding: "0px 5px",
+    ":hover": {
+      color:"lightgray",
+    }
+  }
 });
 
 export default ({animations, inputValue, showMergeOptions, handleAnimation, stylesheet, icon}) => {
@@ -37,6 +44,16 @@ export default ({animations, inputValue, showMergeOptions, handleAnimation, styl
 
   return (
     <div className={css(styles.animationFrame)}>
+      <p>Interactive demo for 
+        <a 
+          href="https://github.com/FormidableLabs/react-animations" 
+          rel="noopener noreferrer" 
+          target="_blank"
+          className={css(styles.a)}
+        >
+          react-animations 
+        </a>
+      </p>
 
       { inputValue 
         ? <h1 className={`
@@ -58,10 +75,9 @@ export default ({animations, inputValue, showMergeOptions, handleAnimation, styl
           style={{display: mergedAnimations.length === 2 ? "block" : "none" }} 
           onClick={handleAnimation}
         >
-            <i 
-              className={`fa fa-repeat fa-2x `} 
-            />
-            <div>{newAnimation}</div>
+          <i 
+            className={`fa fa-repeat fa-2x `} 
+          />
         </div>
       }
 
