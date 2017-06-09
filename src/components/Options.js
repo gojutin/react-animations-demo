@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 import icons from '../icons';
+import Toggle from 'react-toggle'
 import {Collapse} from 'react-collapse';
 
 // components
@@ -13,37 +14,71 @@ const styles = StyleSheet.create({
   },
   iconBox: {
     height: 175 + "px", 
-    overflow: "auto", 
     cursor: "pointer", 
-    border: "2px solid #3E4551",
+    border: "1px solid #3E4551",
     borderRadius: 5 + "px",
+    margin: 15 + "px",
+    overflowY: "auto",
+	  "-webkitOverflowScrolling": "touch",
+  },
+  optionsWrapper: {
+    marginBottom: 25 + "px",
   },
 });
 
-export default ({showOptions, inputValue, handleInput, duration, handleDuration, handleIcon, icon }) =>
+export default ({showOptions, inputValue, inputError, handleInput, duration, handleDuration, handleIcon, icon, children, showMergeOptions, toggleMergeOptions, toggleShowIcons, showIcons }) =>
+<div>
   <Collapse isOpened={showOptions}>
-    <div className="columns">
-      <div className="column is-10">
-        <label>Type something</label>
-        <Input
-          type="text"
-          inputValue={inputValue}
-          onChange={handleInput}
-        />
-      </div>
-  
- 
-      <div className="column is-2">
-        <label>Duration</label>
+    <div className={css(styles.optionsWrapper)}>
+      <div className="columns is-mobile is-multiline">
+        <div className="column is-4-tablet is-12-mobile is-offset-2-tablet">
+          <label>text</label>
           <Input
-            type="number"
-            inputValue={duration}
-            onChange={handleDuration}
-          />  
+            type="text"
+            inputValue={inputValue}
+            inputError={inputError}
+            onChange={handleInput}
+          />
+        </div>
+      
+        <div className="column is-2-tablet is-4-mobile is-offset-1-mobile  ">
+          <label>duration</label>
+            <Input
+              type="number"
+              inputValue={duration}
+              onChange={handleDuration}
+            />  
+        </div>
+        <div className="column is-1-tablet is-3-mobile ">
+          <p>merge</p>
+          <Toggle
+            defaultChecked={showMergeOptions}
+            checked={showMergeOptions}
+            onChange={toggleMergeOptions} 
+          />
+        </div>
+        <div className="column is-1-tablet is-3-mobile ">
+          <p>icons</p>
+          <Toggle
+            defaultChecked={showIcons}
+            checked={showIcons}
+            onChange={toggleShowIcons} 
+          />
+        </div>
       </div>
       </div>
-    <label>Choose an icon</label>
-    <div className={css(styles.iconBox)}>
+    </Collapse>
+    <Collapse isOpened={showOptions && showMergeOptions}>
+      <div>
+        Please select two animations. Your custom animations will be added as a button below.
+      </div>
+      <div>
+        You can get really crazy and merge merged animations. Some combinations may not work well together. You will figure it out.
+      </div>
+      <br />
+    </Collapse>
+    <Collapse isOpened={showOptions && showIcons}>
+      <div className={css(styles.iconBox)}>
         { icons.map((thisIcon, i) => 
             <FontIcon 
               key={i} 
@@ -52,8 +87,9 @@ export default ({showOptions, inputValue, handleInput, duration, handleDuration,
               style={{color: thisIcon === icon ? "#00C851": "#3E4551", margin:5 + "px"}}
             />
           )
-
         }
-    </div>
+      </div>
+    <br />
   </Collapse>
+</div>
 

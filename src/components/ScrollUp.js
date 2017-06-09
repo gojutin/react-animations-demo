@@ -11,5 +11,5 @@ export default ({className}) =>
       left: 45 + "%"
     }}
   >
-    <i className={`fa fa-arrow-circle-up ${className}`} />
+    <i className={`fa fa-arrow-up ${className}`} />
   </ScrollToTop>

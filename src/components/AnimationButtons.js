@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
 const styles = StyleSheet.create({
   animationButton: {
+    backgroundColor: "#f4f4f4",
     height: 38 + "px",
     paddingTop: 8 + "px",
     margin:"2px 2px",
@@ -11,8 +12,7 @@ const styles = StyleSheet.create({
     border: "1px solid #bdbdbd",
     outline: "none",
     cursor: "pointer",
-    overflowY: "auto",
-    // display: "inline-block",
+    overflowY: "hidden",
     ':hover': {
       background: "#eeeeee",
     }
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     color: "#0277bd",
   },
   mergeBorder: {
-    border: "1px solid #00C851"
+    border: "1px dashed #bdbdbd"
   },
   animationButtonGrayedOut: {
     background: "#bdbdbd",
@@ -41,10 +41,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({animations, showMergeOptions, handleMerge, handleAnimation}) => {
-  const {animationsObject, mergedAnimations, originalAnimations } = animations;
-  return (
-    <div className="columns is-multiline">
+export default class AnimationButtons extends Component{
+
+  
+
+  render() {
+    const {animations, showMergeOptions, handleMerge, handleAnimation} = this.props;
+    const {animationsObject, mergedAnimations, originalAnimations } = animations;
+    return (
+      <div className="columns is-multiline">
       { Object.keys(animationsObject).map(key => {
           const name = animationsObject[key]["name"];
           const isSelected = mergedAnimations.find(animation => animation.name === name);
@@ -53,13 +58,14 @@ export default ({animations, showMergeOptions, handleMerge, handleAnimation}) =>
           return (
             <div key={name} className="column is-2" style={{padding: 2 + "px"}}>
               <div
-                className={`
-                  ${showMergeOptions && !isDone && css(styles.mergeBorder)}
-                  ${css(styles.animationButton)}
-                  ${isSelected && css(styles.animationButtonSelected)}
-                  ${!isOriginal && !isDone && css(styles.newAnimation)}
-                  ${!isSelected && isDone && css(styles.animationButtonGrayedOut)}
-                `}
+                className={css(
+                  styles.animationButton,
+                  showMergeOptions && !isDone && styles.mergeBorder,
+                  isSelected && styles.animationButtonSelected,
+                  !isOriginal && !isDone && styles.newAnimation,
+                  !isSelected && isDone && styles.animationButtonGrayedOut,
+                )}
+                
                 onClick={
                   showMergeOptions 
                     ? () => handleMerge(name, animationsObject[key])
@@ -73,7 +79,6 @@ export default ({animations, showMergeOptions, handleMerge, handleAnimation}) =>
         }
       )}
   </div>
-  );
+    );
+  }
 }
-
-  

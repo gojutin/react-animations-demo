@@ -10,10 +10,10 @@ const styles = StyleSheet.create({
     position: "fixed",
     background: "#2E2E2E",
     zIndex: 9999,
-    padding: 0,
+    padding: 10 + "px",
   },
   playButton: {
-    marginTop: 30 + "px",
+    marginTop: 25 + "px",
     background: "none",
     cursor: "pointer",
     outline: "none",
@@ -37,26 +37,29 @@ export default ({animations, inputValue, showMergeOptions, handleAnimation, styl
 
   return (
     <div className={css(styles.animationFrame)}>
+
       { inputValue 
         ? <h1 className={`
-            ${css(styles.text)}
-            ${css(stylesheet[currentAnimation])}
+            ${css(styles.text, stylesheet[currentAnimation])}
           `}>
             {inputValue}
           </h1>
         : <i className={` 
               fa
               ${icon}
-              ${css(styles.child)}
-              ${css(stylesheet[currentAnimation])}
+              ${css(styles.child, stylesheet[currentAnimation])}
             `}
           />   
       }
+
       { showMergeOptions && 
-        <div className={css(styles.playButton)} style={{display: mergedAnimations.length === 2 ? "block" : "none" }} >
+        <div 
+          className={css(styles.playButton)} 
+          style={{display: mergedAnimations.length === 2 ? "block" : "none" }} 
+          onClick={handleAnimation}
+        >
             <i 
-              className={`fa fa-repeat fa-2x `}
-              onClick={handleAnimation} 
+              className={`fa fa-repeat fa-2x `} 
             />
             <div>{newAnimation}</div>
         </div>

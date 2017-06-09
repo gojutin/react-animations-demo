@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     animationDuration: '2s',
   },
   optionsBox: {
-    position: "relative",
+    position: "absolute",
     top: 260 + "px",
     textAlign: "center",
     marginLeft: 10 + "px",
@@ -29,9 +29,10 @@ const styles = StyleSheet.create({
     color: "#3E4551",
   },
   scrollUpIcon: {
-    fontSize: 50 + "px",
-    color: "#ffbb33",
+    fontSize: 40 + "px",
+    color: "#00C851",
     cursor: "pointer",
+    opacity: 0.5,
   }
 });
 

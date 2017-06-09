@@ -7,7 +7,6 @@ import styles from './appStyles';
 import GitHub from './components/GitHub';
 import AnimationFrame from './components/AnimationFrame';
 import Options from './components/Options';
-import MergeOptions from './components/MergeOptions';
 import AnimationButtons from './components/AnimationButtons';
 import ScrollUp from './components/ScrollUp';
 
@@ -23,9 +22,11 @@ export default class App extends Component {
       duration: '1',
     },
     inputValue: "",
+    inputError: "",
     showMergeOptions: false,
     showOptions: false,
     icon: "fa-child",
+    showIcons: false,
   }
 
   componentWillMount() {
@@ -87,6 +88,19 @@ export default class App extends Component {
   toggleShowOptions = () => {
     this.setState(prevState => ({
       showOptions: !prevState.showOptions,
+    }), () => {
+      if (!this.state.showOptions && this.state.showIcons ) {
+        this.toggleShowIcons();
+      }
+      if (!this.state.showOptions && this.state.showMergeOptions ) {
+        this.toggleMergeOptions();
+      }
+    });
+  }
+
+  toggleShowIcons = () => {
+    this.setState(prevState => ({
+      showIcons: !prevState.showIcons,
     }));
   }
 
@@ -136,9 +150,18 @@ export default class App extends Component {
 
   handleInput = (e) => {
     this.setState({
-      inputValue: e.target.value,
+      inputError: "",
     })
-    this.updateAnimations({currentAnimation: ""})
+    if (e.target.value.length > 30){
+      this.setState({
+        inputError: "oops...you ran out of space"
+      }, () => {return false;})
+    } else {
+      this.setState({
+        inputValue: e.target.value,
+      })
+      this.updateAnimations({currentAnimation: ""})
+    }
   }
 
   handleIcon = (icon) => {
@@ -165,7 +188,7 @@ export default class App extends Component {
   }
   
   render() {
-    const { animations, inputValue, showOptions, showMergeOptions, icon } = this.state;
+    const { animations, inputValue, inputError, showOptions, showMergeOptions, icon, showIcons } = this.state;
 
     const stylesheet = StyleSheet.create(animations.animationsObject);
 
@@ -187,22 +210,21 @@ export default class App extends Component {
           <i 
             className="fa fa-ellipsis-h fa-2x" 
             onClick={this.toggleShowOptions} 
-            style={{color: showOptions ? "#00C851" : "#4B515D"}}
+            style={{color: showOptions ? "#00C851" : "#4B515D", marginBottom: 10 + "px"}}
           />
           <Options
             showOptions={showOptions} 
+            showMergeOptions={showMergeOptions}
+            toggleMergeOptions={this.toggleMergeOptions}
             inputValue={inputValue}
+            inputError={inputError}
             handleInput={this.handleInput}
             duration={animations.duration}
             handleDuration={this.handleDuration}
             handleIcon={this.handleIcon }
             icon={icon}
-          />
-
-          <MergeOptions 
-            showMergeOptions={showMergeOptions}
-            toggleMergeOptions={this.toggleMergeOptions}
-            className={css(styles.mergeToggle)}
+            showIcons={showIcons}
+            toggleShowIcons={this.toggleShowIcons}
           />
 
           <AnimationButtons
