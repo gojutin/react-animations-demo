@@ -2,7 +2,7 @@
 
 ### An interactive app showcasing the wonderful react animations provided by our friends at [Formidable Labs](https://formidable.com/). 
 
-### [Check out the interactive demo here](react-animations-demo.surge.sh)
+### [Check out the interactive demo here](http://react-animations-demo.surge.sh)
 
 This project is a single-page application that was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
