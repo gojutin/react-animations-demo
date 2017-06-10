@@ -31,7 +31,7 @@ Open `localhost:3000` in your browser.
 
 ### Try out react-animations and Aphrodite
 
-[![Edit react-animations-demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/r0KzgEVZk)
+[Try react-animations on CodeSandbox](https://codesandbox.io/s/r0KzgEVZk)
 
 
 

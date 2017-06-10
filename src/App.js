@@ -264,6 +264,13 @@ export default class App extends Component {
             handleAnimation={this.handleAnimation}
           />
 
+          <p>
+            <a 
+              href="https://codesandbox.io/s/r0KzgEVZk" 
+              rel="noopener noreferrer"
+              target="_blank"
+            >try react-animations on CodeSandbox</a>
+          </p>
           <br />
 
           <ScrollUp className={css(styles.scrollUpIcon)} />
