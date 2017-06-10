@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
@@ -28,11 +29,11 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 7 + "em",
-    paddingTop: .5 + "em", 
+    paddingTop: .4 + "em", 
   },
   text: {
     paddingTop: 70 + "px", 
-    color: "#00C851",
+    fontSize: 30 + 'px',
     '@media (min-width: 750px)': {
       paddingTop: 50 + "px",
       fontSize: 80 + 'px',
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ({animations, inputValue, showMergeOptions, handleAnimation, stylesheet, icon}) => {
+const AnimationFrame = ({animations, inputValue, showMergeOptions, handleAnimation, stylesheet, icon, color}) => {
 
   const { currentAnimation, mergedAnimations } = animations;
 
@@ -63,14 +64,17 @@ export default ({animations, inputValue, showMergeOptions, handleAnimation, styl
           react-animations 
         </a>
       </p>
-
+      <div style={{color}}>
       { inputValue 
-        ? <h1 className={`
-            ${`
-              ${css(styles.text, stylesheet[currentAnimation])}
-              title is-2
+        ? <h1 
+            style={{color}}
+            className={`
+              ${`
+                ${css(styles.text, stylesheet[currentAnimation])}
+                title is-2
+              `}
             `}
-          `}>
+          >
             {inputValue}
           </h1>
         : <i className={` 
@@ -80,6 +84,7 @@ export default ({animations, inputValue, showMergeOptions, handleAnimation, styl
             `}
           />   
       }
+      </div>
 
       { mergedAnimations.length === 2 && 
         <div 
@@ -96,4 +101,17 @@ export default ({animations, inputValue, showMergeOptions, handleAnimation, styl
   );
 }
 
-  
+AnimationFrame.propTypes = {
+  showMergeOptions: _.bool, 
+  inputValue: _.string,
+  handleAnimation: _.func,
+  stylesheet: _.object,
+  icon: _.string,
+  animations: _.shape({
+    currentAnimations: _.object,
+    mergedAnimations: _.array,
+  }),
+}
+
+
+export default AnimationFrame;

@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'prop-types';
 import { css, StyleSheet } from 'aphrodite';
+import Button from './Button';
 
 const styles = StyleSheet.create({
   animationButton: {
@@ -43,13 +44,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const AnimationButtons = (props) => {
+const ButtonGroup = (props) => {
   const {animations, showMergeOptions, handleMerge, handleAnimation} = props;
   const {animationsObject, mergedAnimations, originalAnimations } = animations;
 
   return (
-    <div className="columns is-multiline">
-    { Object.keys(animationsObject).map(key => {
+    <div className="columns is-multiline is-mobile">
+    { Object.keys(animationsObject).sort().map(key => {
         const name = animationsObject[key]["name"];
         const isSelected = mergedAnimations.find(animation => animation.name === name);
         const isOriginal = originalAnimations[name];
@@ -62,19 +63,17 @@ const AnimationButtons = (props) => {
           !isSelected && isDone && styles.animationButtonGrayedOut,
         )
         return (
-          <div key={name} className="column is-2" style={{padding: 1 + "px", overflowY: "hidden"}}>
-            <div
-              className={buttonClass}
-              
-              onClick={
-                showMergeOptions 
-                  ? () => handleMerge(name, animationsObject[key])
-                  : () => handleAnimation(name)
-              }
-            >
-              {name}
-            </div>
-          </div>
+          <Button
+            key={name}
+            className={buttonClass}
+            onClick={
+              showMergeOptions 
+                ? () => handleMerge(name, animationsObject[key])
+                : () => handleAnimation(name)
+            }
+          >
+            {name}
+          </Button>
         )
       }
     )}
@@ -82,7 +81,7 @@ const AnimationButtons = (props) => {
   );
 }
 
-AnimationButtons.propTypes = {
+ButtonGroup.propTypes = {
   showMergeOptions: _.bool, 
   handleMerge: _.func,
   handleAnimation:  _.func,
@@ -93,4 +92,4 @@ AnimationButtons.propTypes = {
   }),
 }
 
-export default AnimationButtons;
+export default ButtonGroup;

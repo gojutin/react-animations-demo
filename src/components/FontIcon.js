@@ -1,4 +1,9 @@
 import React from 'react';
 
-export default ({className, onClick, style}) =>
-  <i className={className} style={style} onClick={onClick} />
+export default ({icon, onClick, style, searchIconValue}) =>
+<span onClick={onClick} className={searchIconValue && "column is-4"}>
+  <i className={`fa ${icon}`} style={style} />
+    {
+      searchIconValue && <p>{icon}</p>
+    }
+</span>

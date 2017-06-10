@@ -1,8 +1,9 @@
 # react-animations demo
 
-### An interactive app showcasing the wonderful react animations provided by our friends at [Formidable Labs](https://formidable.com/). 
+### An interactive demo showcasing the wonderful React animations provided by our friends at [Formidable Labs](https://formidable.com/). 
 
-### [Check out the interactive demo here](http://react-animations-demo.surge.sh)
+### Try it out
+### [rad.surge.sh](http://rad.surge.sh)
 
 This project is a single-page application that was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
@@ -13,6 +14,9 @@ Library | Description
 [React](https://facebook.github.io/react/) | A JavaScript library for building user interfaces
 [react-animations](https://github.com/FormidableLabs/react-animations) | A collection of animations for inline style libraries
 [Aphrodite](https://github.com/Khan/aphrodite) | It's inline styles, but they work!
+[Bulma](http://bulma.io) | A modern CSS framework based on Flexbox
+[React Color](https://casesandberg.github.io/react-color/) | A Collection of Color Pickers from Sketch, Photoshop, Chrome, Github, Twitter, Material Design & more
+[rc-slider](http://react-component.github.io/slider/) | Slider UI component for React
 
 ## How to run the app locally
 

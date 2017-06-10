@@ -3,7 +3,7 @@ import ScrollToTop from 'react-scroll-up';
 
 export default ({className}) => 
   <ScrollToTop 
-    showUnder={400} 
+    showUnder={500} 
     style={{
       position: "fixed", 
       bottom: 0, 

@@ -1,10 +1,12 @@
 import React from 'react';
 import _ from 'prop-types';
+import { headShake } from 'react-animations';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
   inputWrapper: {
-    height: 50 + "px"
+    height: 45 + "px",
+    marginBottom: 2 + "px",
   },
   input: {
     borderRadius: 5 + "px",
@@ -13,26 +15,31 @@ const styles = StyleSheet.create({
     padding: 5 + "px",
     outline: "none",
     width: 98 + "%",
+    textAlign: "center",
+  },
+  headShake: {
+    animationName: headShake,
+    animationDuration: '1s',
   },
 })                
 
-const Input = ({inputValue, inputError, onChange, type}) => 
+const Input = ({inputValue, inputError, onChange, type, placeholder}) => 
   <div className={css(styles.inputWrapper)}>
     <input
       type={type}
       value={inputValue}
       onChange={onChange}
-      className={css(styles.input)}
+      className={css(styles.input, inputError && styles.headShake)}
+      placeholder={placeholder}
     />
-    <div>{inputError}</div>
   </div>
 
 Input.propTypes = {
   inputValue: _.string,
   inputError: _.string, 
   onChange: _.func, 
-  type: _.string
-
+  type: _.string,
+  placeholder: _.string,
 }
 
 export default Input;

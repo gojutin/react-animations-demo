@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import * as react_animations from 'react-animations';
 import styles from './appStyles';
+import icons from './icons';
 
 // components
 import GitHub from './components/GitHub';
 import AnimationFrame from './components/AnimationFrame';
 import Options from './components/Options';
-import AnimationButtons from './components/AnimationButtons';
+import ButtonGroup from './components/ButtonGroup';
 import ScrollUp from './components/ScrollUp';
 
 export default class App extends Component {
@@ -19,14 +20,16 @@ export default class App extends Component {
       currentAnimation: "",
       mergedAnimations: [],
       newAnimation: "",
-      duration: '1',
+      duration: 1,
     },
     inputValue: "",
-    inputError: "",
+    inputError: false,
+    searchIconValue: "",
     showMergeOptions: false,
     showOptions: false,
     icon: "fa-code",
     showIcons: false,
+    color: "#00C851",
   }
 
   componentWillMount() {
@@ -76,6 +79,13 @@ export default class App extends Component {
         }
       },100)
     })
+  }
+
+  handleSearchIcons = (e) => {
+    const searchIconValue = e.target.value;
+    this.setState({
+      searchIconValue,
+    });
   }
 
   toggleMergeOptions = () => {
@@ -153,11 +163,11 @@ export default class App extends Component {
 
   handleInput = (e) => {
     this.setState({
-      inputError: "",
+      inputError: false,
     })
-    if (e.target.value.length > 15){
+    if (e.target.value.length > 20){
       this.setState({
-        inputError: "oops...you ran out of space"
+        inputError: true,
       }, () => {return false;})
     } else {
       this.setState({
@@ -174,26 +184,31 @@ export default class App extends Component {
     })
   }
 
-  handleDuration = (e) => {
-    if (e.target.value < 0 || e.target.value > 25) {
-      return false;
-    } 
+  handleColor = ({hex}) => {
+    this.setState({color: hex})
+  }
+
+  handleDuration = (value) => {
     const newSlice = Object.assign({}, this.state.animations.animationsObject);
     for (let prop in newSlice) {
-      console.log(prop)
-      newSlice[prop].animationDuration = e.target.value + "s";
+      newSlice[prop].animationDuration = value + "s";
     }
     this.updateAnimations({
       currentAnimation: "",
       animationsObject: newSlice,
-      duration: e.target.value,
+      duration: value,
     })
   }
   
   render() {
-    const { animations, inputValue, inputError, showOptions, showMergeOptions, icon, showIcons } = this.state;
+    const { animations, inputValue, inputError, showOptions, showMergeOptions, icon, showIcons, color, searchIconValue } = this.state;
 
     const stylesheet = StyleSheet.create(animations.animationsObject);
+
+    const renderedIcons = searchIconValue 
+      ? icons.filter(icon => icon.toLowerCase().includes(searchIconValue.toLowerCase())) 
+      : icons;
+
 
      return (
       <div>
@@ -207,6 +222,7 @@ export default class App extends Component {
           handleAnimation={this.handleAnimation} 
           stylesheet={stylesheet}
           icon={icon}
+          color={color}
         />
 
         <div className={css(styles.optionsBox)}>
@@ -216,7 +232,7 @@ export default class App extends Component {
             onClick={this.toggleShowOptions} 
             style={{
               color: showOptions ? "#00C851" : "#4B515D", 
-              marginBottom: 10 + "px", 
+              marginBottom: 15 + "px", 
               cursor: "pointer"
             }}
           />
@@ -226,6 +242,9 @@ export default class App extends Component {
             showMergeOptions={showMergeOptions}
             toggleMergeOptions={this.toggleMergeOptions}
             inputValue={inputValue}
+            renderedIcons={renderedIcons}
+            handleSearchIcons={this.handleSearchIcons}
+            searchIconValue={searchIconValue}
             inputError={inputError}
             handleInput={this.handleInput}
             duration={animations.duration}
@@ -233,15 +252,19 @@ export default class App extends Component {
             handleIcon={this.handleIcon }
             icon={icon}
             showIcons={showIcons}
+            color={color}
+            handleColor={this.handleColor}
             toggleShowIcons={this.toggleShowIcons}
           />
 
-          <AnimationButtons
+          <ButtonGroup
             animations={animations}
             showMergeOptions={showMergeOptions}
             handleMerge={this.handleMerge} 
             handleAnimation={this.handleAnimation}
           />
+
+          <br />
 
           <ScrollUp className={css(styles.scrollUpIcon)} />
         </div>
