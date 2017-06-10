@@ -11,19 +11,3 @@ body, html {
    outline: 0;
    box-shadow: none;
  }
-
- .Select-value {
-   padding: 5px;
- }
-
- .Select-value-label, .Select-option {
-   padding-left: 5px;
- }
-
-.fa-ellipsis-h {
-  cursor: pointer;
-}
-
-input {
-  text-align: center;
-}

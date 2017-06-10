@@ -31,7 +31,7 @@ export default ({showOptions, inputValue, inputError, handleInput, duration, han
   <Collapse isOpened={showOptions}>
     <div className={css(styles.optionsWrapper)}>
       <div className="columns is-mobile is-multiline">
-        <div className="column is-4-tablet is-12-mobile is-offset-2-tablet">
+        <div className="column is-3-tablet is-offset-3-tablet is-12-mobile">
           <label>text</label>
           <Input
             type="text"
@@ -41,7 +41,7 @@ export default ({showOptions, inputValue, inputError, handleInput, duration, han
           />
         </div>
       
-        <div className="column is-2-tablet is-4-mobile is-offset-1-mobile  ">
+        <div className="column is-1-tablet is-4-mobile is-offset-1-mobile  ">
           <label>duration</label>
             <Input
               type="number"
@@ -52,7 +52,6 @@ export default ({showOptions, inputValue, inputError, handleInput, duration, han
         <div className="column is-1-tablet is-3-mobile ">
           <p>merge</p>
           <Toggle
-            defaultChecked={showMergeOptions}
             checked={showMergeOptions}
             onChange={toggleMergeOptions} 
           />
@@ -60,7 +59,6 @@ export default ({showOptions, inputValue, inputError, handleInput, duration, han
         <div className="column is-1-tablet is-3-mobile ">
           <p>icons</p>
           <Toggle
-            defaultChecked={showIcons}
             checked={showIcons}
             onChange={toggleShowIcons} 
           />
@@ -70,7 +68,7 @@ export default ({showOptions, inputValue, inputError, handleInput, duration, han
     </Collapse>
     <Collapse isOpened={showOptions && showMergeOptions}>
       <div>
-        Please select two animations. Your custom animations will be added as a button below for the duration of the session.
+        Please select two animations. Your custom animations will be added as buttons below until you close the browser tab.
       </div>
       <div>
         You can get really crazy and merge merged animations. Some combinations may not work well together. You will figure it out.

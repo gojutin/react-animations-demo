@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import _ from 'prop-types';
 import { css, StyleSheet } from 'aphrodite';
 
 const styles = StyleSheet.create({
@@ -9,6 +10,7 @@ const styles = StyleSheet.create({
     margin:"2px 2px",
     borderRadius: 5 + "px",
     width: 98 + "%",
+    maxWidth: 98 + "%",
     border: "1px solid #bdbdbd",
     outline: "none",
     cursor: "pointer",
@@ -41,44 +43,54 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class AnimationButtons extends Component{
+const AnimationButtons = (props) => {
+  const {animations, showMergeOptions, handleMerge, handleAnimation} = props;
+  const {animationsObject, mergedAnimations, originalAnimations } = animations;
 
-  
-
-  render() {
-    const {animations, showMergeOptions, handleMerge, handleAnimation} = this.props;
-    const {animationsObject, mergedAnimations, originalAnimations } = animations;
-    return (
-      <div className="columns is-multiline">
-      { Object.keys(animationsObject).map(key => {
-          const name = animationsObject[key]["name"];
-          const isSelected = mergedAnimations.find(animation => animation.name === name);
-          const isOriginal = originalAnimations[name];
-          const isDone = mergedAnimations.length === 2;
-          return (
-            <div key={name} className="column is-2" style={{padding: 2 + "px"}}>
-              <div
-                className={css(
-                  styles.animationButton,
-                  showMergeOptions && !isDone && styles.mergeBorder,
-                  isSelected && styles.animationButtonSelected,
-                  !isOriginal && !isDone && styles.newAnimation,
-                  !isSelected && isDone && styles.animationButtonGrayedOut,
-                )}
-                
-                onClick={
-                  showMergeOptions 
-                    ? () => handleMerge(name, animationsObject[key])
-                    : () => handleAnimation(name)
-                }
-              >
-                {name}
-              </div>
+  return (
+    <div className="columns is-multiline">
+    { Object.keys(animationsObject).map(key => {
+        const name = animationsObject[key]["name"];
+        const isSelected = mergedAnimations.find(animation => animation.name === name);
+        const isOriginal = originalAnimations[name];
+        const isDone = mergedAnimations.length === 2;
+        const buttonClass = css(
+          styles.animationButton,
+          showMergeOptions && !isDone && styles.mergeBorder,
+          isSelected && styles.animationButtonSelected,
+          !isOriginal && !isDone && styles.newAnimation,
+          !isSelected && isDone && styles.animationButtonGrayedOut,
+        )
+        return (
+          <div key={name} className="column is-2" style={{padding: 1 + "px", overflowY: "hidden"}}>
+            <div
+              className={buttonClass}
+              
+              onClick={
+                showMergeOptions 
+                  ? () => handleMerge(name, animationsObject[key])
+                  : () => handleAnimation(name)
+              }
+            >
+              {name}
             </div>
-          )
-        }
-      )}
+          </div>
+        )
+      }
+    )}
   </div>
-    );
-  }
+  );
 }
+
+AnimationButtons.propTypes = {
+  showMergeOptions: _.bool, 
+  handleMerge: _.func,
+  handleAnimation:  _.func,
+  animations: _.shape({
+    animationsObject: _.object,
+    originalAnimations: _.object,
+    mergedAnimations: _.array,
+  }),
+}
+
+export default AnimationButtons;

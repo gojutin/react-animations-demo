@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
   },
 })                
 
-export default ({inputValue, inputError, onChange, type}) => 
+const Input = ({inputValue, inputError, onChange, type}) => 
   <div className={css(styles.inputWrapper)}>
     <input
       type={type}
@@ -25,3 +26,13 @@ export default ({inputValue, inputError, onChange, type}) =>
     />
     <div>{inputError}</div>
   </div>
+
+Input.propTypes = {
+  inputValue: _.string,
+  inputError: _.string, 
+  onChange: _.func, 
+  type: _.string
+
+}
+
+export default Input;

@@ -50,21 +50,24 @@ export default class App extends Component {
     })
   }
 
-  updateAnimations = (animationObject, cb) => {
+  updateAnimations = (animationObject, callback) => {
     this.setState({
-      animations: Object.assign({}, this.state.animations, animationObject)
-    }, () => { if (cb) cb();})
+      animations: Object.assign(
+        {}, this.state.animations, animationObject
+      )
+    }, () => { if (callback) callback();})
   }
 
 
   handleAnimation = animation => {
+    const { showMergeOptions, animations } = this.state;
     this.updateAnimations({
         currentAnimation: "",
     }, () => {
       setTimeout(() => {
-        if (this.state.showMergeOptions) {
+        if (showMergeOptions) {
           this.updateAnimations({
-            currentAnimation: this.state.animations.newAnimation,
+            currentAnimation: animations.newAnimation,
           })
         } else {
           this.updateAnimations({
@@ -89,10 +92,11 @@ export default class App extends Component {
     this.setState(prevState => ({
       showOptions: !prevState.showOptions,
     }), () => {
-      if (!this.state.showOptions && this.state.showIcons ) {
+      const { showOptions, showIcons, showMergeOptions } = this.state;
+      if (!showOptions && showIcons ) {
         this.toggleShowIcons();
       }
-      if (!this.state.showOptions && this.state.showMergeOptions ) {
+      if (!showOptions && showMergeOptions ) {
         this.toggleMergeOptions();
       }
     });
@@ -114,7 +118,7 @@ export default class App extends Component {
     if (exists !== -1) {
       mergeSlice.splice(exists,1);
     } else {
-      if (mergedAnimations.length === 2) {return};
+      if (mergedAnimations.length === 2) {return;};
       mergeSlice.push(animation);
     }
     this.updateAnimations({
@@ -126,15 +130,14 @@ export default class App extends Component {
           + mergedAnimations[1]["name"];
 
         // this is where the merge happens
-        const mergedAnim = react_animations.merge(
+        const mergedAnimation = react_animations.merge(
           mergedAnimations[0]["animationName"],
           mergedAnimations[1]["animationName"],
         )
         const newAnimationsObject = Object.assign(
-          {}, 
-          animationsObject, 
+          {}, animationsObject, 
           {[newAnimationName] : {
-              animationName: mergedAnim,
+              animationName: mergedAnimation,
               animationDuration: duration + 's',
               name: newAnimationName,
             }
@@ -152,7 +155,7 @@ export default class App extends Component {
     this.setState({
       inputError: "",
     })
-    if (e.target.value.length > 30){
+    if (e.target.value.length > 15){
       this.setState({
         inputError: "oops...you ran out of space"
       }, () => {return false;})
@@ -194,7 +197,7 @@ export default class App extends Component {
 
      return (
       <div>
-
+        
         <GitHub className={css(styles.github)} />
 
         <AnimationFrame 
@@ -207,11 +210,17 @@ export default class App extends Component {
         />
 
         <div className={css(styles.optionsBox)}>
+
           <i 
             className="fa fa-ellipsis-h" 
             onClick={this.toggleShowOptions} 
-            style={{color: showOptions ? "#00C851" : "#4B515D", marginBottom: 10 + "px"}}
+            style={{
+              color: showOptions ? "#00C851" : "#4B515D", 
+              marginBottom: 10 + "px", 
+              cursor: "pointer"
+            }}
           />
+
           <Options
             showOptions={showOptions} 
             showMergeOptions={showMergeOptions}

@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
     marginLeft: 10 + "px",
     marginRight: 10 + "px",
     padding: 10 + "px",
+    maxWidth: 95 + "%",
   },
-
   github: {
     position: "fixed",
     top: 15,

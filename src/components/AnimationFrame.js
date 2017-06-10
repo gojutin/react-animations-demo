@@ -11,9 +11,14 @@ const styles = StyleSheet.create({
     background: "#2E2E2E",
     zIndex: 9999,
     padding: 10 + "px",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
   },
-  playButton: {
-    marginTop: 20 + "px",
+  replayButton: {
+    position: "absolute",
+    bottom: 0,
+    left: 45 + "%",
+    right: 45 + "%",
     background: "none",
     cursor: "pointer",
     outline: "none",
@@ -21,15 +26,19 @@ const styles = StyleSheet.create({
     color: "#bdbdbd",
     overflowY: "scroll",
   },
-  child: {
+  icon: {
     fontSize: 7 + "em",
     paddingTop: .5 + "em", 
   },
   text: {
-    fontSize: 4.5 + "em",
-    paddingTop: 61 + "px", 
+    paddingTop: 70 + "px", 
+    color: "#00C851",
+    '@media (min-width: 750px)': {
+      paddingTop: 50 + "px",
+      fontSize: 80 + 'px',
+    },
   },
-  a: {
+  anchor: {
     color: "white",
     padding: "0px 5px",
     ":hover": {
@@ -40,7 +49,7 @@ const styles = StyleSheet.create({
 
 export default ({animations, inputValue, showMergeOptions, handleAnimation, stylesheet, icon}) => {
 
-  const { currentAnimation, mergedAnimations, newAnimation, } = animations;
+  const { currentAnimation, mergedAnimations } = animations;
 
   return (
     <div className={css(styles.animationFrame)}>
@@ -49,7 +58,7 @@ export default ({animations, inputValue, showMergeOptions, handleAnimation, styl
           href="https://github.com/FormidableLabs/react-animations" 
           rel="noopener noreferrer" 
           target="_blank"
-          className={css(styles.a)}
+          className={css(styles.anchor)}
         >
           react-animations 
         </a>
@@ -57,26 +66,28 @@ export default ({animations, inputValue, showMergeOptions, handleAnimation, styl
 
       { inputValue 
         ? <h1 className={`
-            ${css(styles.text, stylesheet[currentAnimation])}
+            ${`
+              ${css(styles.text, stylesheet[currentAnimation])}
+              title is-2
+            `}
           `}>
             {inputValue}
           </h1>
         : <i className={` 
               fa
               ${icon}
-              ${css(styles.child, stylesheet[currentAnimation])}
+              ${css(styles.icon, stylesheet[currentAnimation])}
             `}
           />   
       }
 
-      { showMergeOptions && 
+      { mergedAnimations.length === 2 && 
         <div 
-          className={css(styles.playButton)} 
-          style={{display: mergedAnimations.length === 2 ? "block" : "none" }} 
+          className={css(styles.replayButton)} 
           onClick={handleAnimation}
         >
           <i 
-            className={`fa fa-repeat fa-2x `} 
+            className="fa fa-repeat fa-2x"
           />
         </div>
       }
