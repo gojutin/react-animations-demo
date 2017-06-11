@@ -3,7 +3,7 @@ import { StyleSheet } from 'aphrodite';
 const styles = StyleSheet.create({
   optionsBox: {
     position: "absolute",
-    top: 250 + "px",
+    top: 300 + "px",
     textAlign: "center",
     padding: 20 + "px",
     width: 100 + "%",

@@ -167,7 +167,7 @@ const Options = ({
 Options.propTypes = {
   showMergeOptions: _.bool, 
   showOptions: _.bool,
-  inputValue: _.string,
+  inputValue: _.bool,
   inputError: _.string,
   handleInput: _.func,
   handleDuration: _.func,

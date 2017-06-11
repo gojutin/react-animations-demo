@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#00C851",
     width: 100 + "%",
-    height: 250 + "px",
+    height: 300 + "px",
     position: "fixed",
     background: "#2E2E2E",
     zIndex: 9999,
@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 7 + "em",
-    paddingTop: .4 + "em", 
+    paddingTop: .6 + "em", 
   },
   text: {
-    paddingTop: 70 + "px", 
+    paddingTop: 100 + "px", 
     fontSize: 30 + 'px',
     '@media (min-width: 750px)': {
-      paddingTop: 50 + "px",
+      paddingTop: 70 + "px",
       fontSize: 80 + 'px',
     },
   },
@@ -103,7 +103,7 @@ const AnimationFrame = ({animations, inputValue, showMergeOptions, handleAnimati
 
 AnimationFrame.propTypes = {
   showMergeOptions: _.bool, 
-  inputValue: _.string,
+  inputValue: _.bool,
   handleAnimation: _.func,
   stylesheet: _.object,
   icon: _.string,

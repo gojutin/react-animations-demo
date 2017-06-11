@@ -2,7 +2,7 @@
 
 ### An interactive demo showcasing the wonderful React animations provided by our friends at [Formidable Labs](https://formidable.com/). 
 
-### Try it out @ [rad.surge.sh](http://rad.surge.sh)
+### Try it out- [rad.surge.sh](http://rad.surge.sh)
 
 This project is a single-page application that was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
@@ -29,9 +29,7 @@ In your terminal:
 
 Open `localhost:3000` in your browser.
 
-### Try out react-animations and Aphrodite
-
-[Try react-animations on CodeSandbox](https://codesandbox.io/s/r0KzgEVZk)
+### [Try react-animations on CodeSandbox](https://codesandbox.io/s/r0KzgEVZk)
 
 
 
