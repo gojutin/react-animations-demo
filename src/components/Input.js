@@ -35,8 +35,8 @@ const Input = ({inputValue, inputError, onChange, type, placeholder}) =>
   </div>
 
 Input.propTypes = {
-  inputValue: _.bool,
-  inputError: _.string, 
+  inputValue: _.string,
+  inputError: _.bool, 
   onChange: _.func, 
   type: _.string,
   placeholder: _.string,

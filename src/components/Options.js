@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   },
   optionsWrapper: {
     marginTop: 10 + "px",
+    marginBottom: 12 + "px",
   },
 });
 
@@ -82,7 +83,7 @@ const Options = ({
             is-4-tablet is-offset-3-tablet 
             is-10-mobile is-offset-1-mobile
           `}
-          style={{padding:"0px .75em 5px .75em"}}
+          style={{padding:"0px .75em 0px .75em"}}
         >
           <label>text</label>
           <Input
@@ -115,8 +116,6 @@ const Options = ({
         </div>
       </div>
     </div>
-
-    <br />
   </Collapse>
   <br />
   <Collapse isOpened={showOptions && showMergeOptions}>
@@ -167,8 +166,8 @@ const Options = ({
 Options.propTypes = {
   showMergeOptions: _.bool, 
   showOptions: _.bool,
-  inputValue: _.bool,
-  inputError: _.string,
+  inputValue: _.string,
+  inputError: _.bool,
   handleInput: _.func,
   handleDuration: _.func,
   duration: _.number,

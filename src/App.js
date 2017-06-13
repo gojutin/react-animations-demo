@@ -228,7 +228,7 @@ export default class App extends Component {
         <div className={css(styles.optionsBox)}>
 
           <i 
-            className="fa fa-ellipsis-h" 
+            className="fa fa-cogs" 
             onClick={this.toggleShowOptions} 
             style={{
               color: showOptions ? "#00C851" : "#4B515D", 
